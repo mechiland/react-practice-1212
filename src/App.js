@@ -1,5 +1,8 @@
 import React from "react";
-import { Provider, useSelector } from "react-redux" ;
+import { useDispatch } from 'react-redux';
+import { Provider, useSelector } from "react-redux";
+
+import { addUser } from "./reducers/usersSlice";
 import store from "./store";
 
 const team = [
@@ -12,13 +15,22 @@ const team = [
 console.log(store.getState().users.all);
 
 const Users = () => {
+  const dispatch = useDispatch();
   const users = useSelector(state => state.users.all)
+
+  const handleAddUser = (event) => {
+    dispatch(addUser({ id: 'React', name: 'React', email: "react@example.com" }));
+  }
+
   return (
-    <ul>
-      {users.map(u => {
-        return <li>{u.name}</li>;
-      })}
-    </ul>
+    <>
+      <ul>
+        {users.map(u => {
+          return <li>{u.name}</li>;
+        })}
+      </ul>
+      <button onClick={handleAddUser}>add user</button>
+    </>
   );
 };
 

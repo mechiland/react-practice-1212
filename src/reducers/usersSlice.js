@@ -15,10 +15,18 @@ const usersSlice = createSlice({
 
   reducers: {
     addUser: (state, action) => {
-      console.log("add User");
+      state.all.push(action.payload);
     }
   }
 
 })
+
+const { actions, reducer } = usersSlice;
+
+const {
+  addUser
+} = actions;
+
+export { addUser };
 
 export default usersSlice;
