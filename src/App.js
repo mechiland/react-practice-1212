@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { Provider, useSelector } from "react-redux" ;
+import store from "./store";
 
 const team = [
   { id: "xqzhou", name: "周晓强", email: "xqzhou@hipacloud.com" },
@@ -9,7 +9,10 @@ const team = [
   { id: "byliu", name: "刘丙乙", email: "xqzhou@hipacloud.com" }
 ];
 
-const Users = ({ users }) => {
+console.log(store.getState().users.all);
+
+const Users = () => {
+  const users = useSelector(state => state.users.all)
   return (
     <ul>
       {users.map(u => {
@@ -21,10 +24,12 @@ const Users = ({ users }) => {
 
 function App() {
   return (
-    <div className="App">
-      <h1>团队列表</h1>
-      <Users users={team} />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <h1>团队列表</h1>
+        <Users />
+      </div>
+    </Provider>
   );
 }
 
